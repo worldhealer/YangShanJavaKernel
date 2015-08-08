@@ -1,9 +1,10 @@
- import org.lwjgl.Sys;
+import org.lwjgl.Sys;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
- 
+
 import java.nio.ByteBuffer;
  
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -36,10 +37,11 @@ public class HelloWorld {
     }
  
     private void init() {
+    	
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
- 
+        
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if ( glfwInit() != GL11.GL_TRUE )
             throw new IllegalStateException("Unable to initialize GLFW");
@@ -49,8 +51,8 @@ public class HelloWorld {
         glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // the window will be resizable
  
-        int WIDTH = 300;
-        int HEIGHT = 300;
+        int WIDTH = 800;
+        int HEIGHT = 800;
  
         // Create the window
         window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World!", NULL, NULL);
