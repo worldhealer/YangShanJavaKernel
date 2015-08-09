@@ -1,3 +1,5 @@
+import static org.lwjgl.opengl.GL11.glViewport;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -8,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 public class Basic5 {
   
     /** position of quad */
-    float x = 400, y = 300;
+    float x = 512, y = 384;
     /** angle of quad rotation */
     float rotation = 0;
   
@@ -25,7 +27,7 @@ public class Basic5 {
   
     public void start() {
         try {
-            Display.setDisplayMode(new DisplayMode(800, 600));
+            Display.setDisplayMode(new DisplayMode(1024, 768));
             Display.create();
         } catch (LWJGLException e) {
             e.printStackTrace();
@@ -62,7 +64,7 @@ public class Basic5 {
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
                 if (Keyboard.getEventKey() == Keyboard.KEY_F) {
-                    setDisplayMode(800, 600, !Display.isFullscreen());
+                    setDisplayMode(1024, 768, !Display.isFullscreen());
                 }
                 else if (Keyboard.getEventKey() == Keyboard.KEY_V) {
                     vsync = !vsync;
@@ -73,9 +75,9 @@ public class Basic5 {
          
         // keep quad on the screen
         if (x < 0) x = 0;
-        if (x > 800) x = 800;
+        if (x > 1024) x = 1024;
         if (y < 0) y = 0;
-        if (y > 600) y = 600;
+        if (y > 768) y = 768;
   
         updateFPS(); // update FPS Counter
     }
@@ -179,29 +181,58 @@ public class Basic5 {
     public void initGL() {
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glOrtho(0, 1024, 0, 768, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }
   
     public void renderGL() {
-        // Clear The Screen And The Depth Buffer
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-  
-        // R,G,B,A Set The Color To Blue One Time Only
-        GL11.glColor3f(0.5f, 0.5f, 1.0f);
-  
-        // draw quad
-        GL11.glPushMatrix();
-            GL11.glTranslatef(x, y, 0);
-            GL11.glRotatef(rotation, 0f, 0f, 1f);
-            GL11.glTranslatef(-x, -y, 0);
-  
-            GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(x - 50, y - 50);
-                GL11.glVertex2f(x + 50, y - 50);
-                GL11.glVertex2f(x + 50, y + 50);
-                GL11.glVertex2f(x - 50, y + 50);
-            GL11.glEnd();
-        GL11.glPopMatrix();
+            // Clear The Screen And The Depth Buffer
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            // draw quad
+           for(int dx=-50;dx<=50;dx++)
+        	   for(int dy=-50;dy<=50;dy++){
+        	       GL11.glColor3f((float)(dx+50)/100, (float)(dy+50)/100, 0.5f);
+        		   x+=dx*20;
+        		   y+=dy*20;
+        	        GL11.glPushMatrix();
+                    GL11.glTranslatef(x, y, 0);
+                    GL11.glRotatef(rotation, 0f, 0f, 1f);
+                    GL11.glTranslatef(-x, -y, 0);
+                    GL11.glBegin(GL11.GL_LINES);
+                    	
+                        GL11.glVertex2f(x - 6, y + 5);
+                        GL11.glVertex2f(x - 3, y + 2);
+                        
+                        GL11.glVertex2f(x - 3, y + 2);
+                        GL11.glVertex2f(x + 3, y + 7);
+                        
+                        GL11.glVertex2f(x + 3, y + 7);
+                        GL11.glVertex2f(x + 3, y + 1);
+                        
+                        GL11.glVertex2f(x + 3, y + 1);
+                        GL11.glVertex2f(x + 7, y + 2);
+                        
+                        GL11.glVertex2f(x + 7, y + 2);
+                        GL11.glVertex2f(x + 2, y - 1);
+                        
+                        GL11.glVertex2f(x + 2, y - 1);
+                        GL11.glVertex2f(x + 5, y - 5);
+                        
+                        GL11.glVertex2f(x + 5, y - 5);
+                        GL11.glVertex2f(x + 0, y - 4);
+                        
+                        GL11.glVertex2f(x + 0, y - 4);
+                        GL11.glVertex2f(x - 5, y - 6);
+                        
+                        GL11.glVertex2f(x - 5, y - 6);
+                        GL11.glVertex2f(x - 4, y + 0);
+                        
+                        GL11.glVertex2f(x - 4, y + 0);
+                        GL11.glVertex2f(x - 6, y + 5);
+                    GL11.glEnd();
+                    GL11.glPopMatrix();
+                    x-=dx*20;
+                    y-=dy*20;
+        	   }
     }
 }
