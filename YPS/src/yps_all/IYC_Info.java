@@ -4,10 +4,10 @@ import java.util.*;
 import org.json.* ;
 
 public class IYC_Info {
-	int IYC_CNTRID ;//	Number(10)	箱ID，箱子的唯一索引，主键
+	String IYC_CNTRID ;//	Number(10)	箱ID，箱子的唯一索引，主键
 	String IYC_CNTRNO ; //	VARCHAR2(11) 	箱号 
-	int IYC_IVOY_ID;//	NUMBER(10)	一程航次ID ,进口
-	int IYC_EVOY_ID;//	NUMBER(10)	二程航次ID,出口， 
+	String IYC_IVOY_ID;//	NUMBER(10)	一程航次ID ,进口
+	String IYC_EVOY_ID;//	NUMBER(10)	二程航次ID,出口， 
 
 	Date IYC_INYTM ;//	DATE 	进场时间 
 	String IYC_DOCTYPE ;//	VARCHAR2(3) 	资料类型,不需要

@@ -3,7 +3,7 @@ package yps_all;
 import java.util.Date;
 
 public class SPR_Plan {
-	int SPR_RANGEID;//	NUMBER(10)	堆存区间的唯一键
+	String SPR_RANGEID;//	NUMBER(10)	堆存区间的唯一键
 	int SPR_SPL_YPLANID;//	NUMBER(10)	堆存计划类型，出口、卸船。。。
 	String SPR_STBAY;//	VARCHAR2(4)	起始位
 	String SPR_EDBAY;//	VARCHAR2(4)	终止位
