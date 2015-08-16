@@ -11,7 +11,7 @@ public class SPR_Plan {
 	String SPR_EDROW;//	VARCHAR2 (1)	终止排
 	String SPR_STTIER;//	VARCHAR2 (1)	起始层
 	String SPR_EDTIER;//	VARCHAR2 (1)	终止层
-	String SPR_VALIDFG;//	VARCHAR2 (1)	区间有效标志
+	String SPR_VALIDFG;//	VARCHAR2 (1)	区间有效标志ze
 	Date SPR_STDATE;//	DATE	区间开始时间
 	String SPR_EDDATE;//	DATE	区间结束时间
 	String SPR_FILTER;//	VARCHAR2 (2000)	区间堆放规则,难以满足具体Group 规则在放箱子时才会确定

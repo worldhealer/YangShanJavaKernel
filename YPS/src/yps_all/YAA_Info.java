@@ -1,4 +1,4 @@
-package yps_all;
+package yps_kernel.yps_all;
 
 public class YAA_Info {
 	String YAA_AREANO ;//	VARCHAR2(2)	箱区号，唯一索引，主键

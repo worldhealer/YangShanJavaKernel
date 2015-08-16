@@ -21,4 +21,21 @@ public class ASC_WORK_Plan {
 	String DESTINATION_LOCATION ;//	VARCHAR2(32)	目的位置
 	String DESTINATION_TRANSFER_ZONE;//	VARCHAR2(32)	目的位置交换区
 
+	
+	public void set(){
+		
+	}
+	public void set_CONTAINER_ID(String s){
+		
+	}
+	
+	
+	public void set_CONTAINER_WI_REF(String s){
+		
+	}
+	
+	public void get(){
+		
+	}
+	
 }
