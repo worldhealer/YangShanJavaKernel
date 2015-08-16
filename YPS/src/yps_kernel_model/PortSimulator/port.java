@@ -28,14 +28,15 @@
  *	ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *	POSSIBILITY OF SUCH DAMAGE.
  */
+package yps_kernel_model.PortSimulator;
 
 import static org.lwjgl.opengl.GL11.glClearColor;
 import java.io.IOException;
-import mdesl.graphics.Color;
-import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
-import mdesl.graphics.TextureRegion;
-import mdesl.graphics.text.BitmapFont; 
+import yps_kernel_model.PortSimulator.mdesl.graphics.Color;
+import yps_kernel_model.PortSimulator.mdesl.graphics.SpriteBatch;
+import yps_kernel_model.PortSimulator.mdesl.graphics.Texture;
+import yps_kernel_model.PortSimulator.mdesl.graphics.TextureRegion;
+import yps_kernel_model.PortSimulator.mdesl.graphics.text.BitmapFont; 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -47,12 +48,6 @@ import org.lwjgl.util.vector.Vector3f;
 
 
 public class port extends SimpleGame {
-
-	public static void main(String[] args) throws LWJGLException {
-		Game game = new port();
-		game.setDisplayMode(640, 480, false);
-		game.start();
-	}
 
 	Texture tex, tex2, tex3;
 	TextureRegion tile;
@@ -71,14 +66,14 @@ public class port extends SimpleGame {
 		
 		//Load some textures
 		try {
-			tex3 = new Texture(Util.getResource("res/null.png"), Texture.NEAREST);
-			tex = new Texture(Util.getResource("res/tiles.png"), Texture.NEAREST);
-			tex2 = new Texture(Util.getResource("res/ptsans_00.png"));
+			tex3 = new Texture(Util.getResource("yps_kernel_model/PortSimulator/res/null.png"), Texture.NEAREST);
+			tex = new Texture(Util.getResource("yps_kernel_model/PortSimulator/res/tiles.png"), Texture.NEAREST);
+			tex2 = new Texture(Util.getResource("yps_kernel_model/PortSimulator/res/ptsans_00.png"));
 			tile = new TextureRegion(tex3, 128, 64, 64, 64);
 			
-			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Util.getResource("res/ptsans_00.png"));
+			font = new BitmapFont(Util.getResource("yps_kernel_model/PortSimulator/res/ptsans.fnt"), Util.getResource("yps_kernel_model/PortSimulator/res/ptsans_00.png"));
 			
-			fontTex = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			fontTex = new Texture(Util.getResource("yps_kernel_model/PortSimulator/res/ptsans_00.png"), Texture.NEAREST);
 			
 			//in Photoshop, we included a small white box at the bottom right of our font sheet
 			//we will use this to draw lines and rectangles within the same batch as our text
