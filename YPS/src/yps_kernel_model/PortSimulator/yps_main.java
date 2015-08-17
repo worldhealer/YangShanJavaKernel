@@ -7,8 +7,8 @@ public class yps_main {
 		SimulatorStart();
 	}
 	public static void SimulatorStart() throws LWJGLException{
-		Game game = new port();
-		game.setDisplayMode(640, 480, false);
-		game.start();
+		port.SingleItem = new port();
+		port.SingleItem.setDisplayMode(640, 480, false);
+		port.SingleItem.start();
 	}
 }

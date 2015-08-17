@@ -48,13 +48,33 @@ import org.lwjgl.util.vector.Vector3f;
 
 
 public class port extends SimpleGame {
-
+	public static port SingleItem=null;
 	Texture tex, tex2, tex3;
-	TextureRegion tile;
-	SpriteBatch batch;
+	public TextureRegion tile;
+	public SpriteBatch batch;
+	public YardManager OpenGLYardManager=null;
 	Texture fontTex;
 	TextureRegion rect;
-	
+	//=========================================================
+	public void DrawBoxLevel(byte level,int LogicalStartX,int LogicalStartY,int LogicalWidth,int LogicalHeight){
+		if(level==0) batch.setColor(0.6f,0.85f,0.92f,1f);
+		else if(level==1) batch.setColor(0.71f, 0.90f, 0.11f, 1f);
+		else if(level==2) batch.setColor(0.99f,0.99f,0f,1f);
+		else if(level==3) batch.setColor(0.92f,0.59f,0.04f,1f);
+		else if(level==4) batch.setColor(0.93f,0.11f,0.14f,1f);
+		else if(level==5) batch.setColor(0.19f,0.14f,0.36f,1f);
+		else batch.setColor(0f,0f,0f,1f);
+		//====================================
+		if(LogicalStartY>200) batch.setColor(0.71f, 0.90f, 0.11f, 1f);
+		if(LogicalStartY>250) batch.setColor(0.99f,0.99f,0f,1f);
+		if(LogicalStartY>300) batch.setColor(0.92f,0.59f,0.04f,1f);
+		if(LogicalStartY>350) batch.setColor(0.93f,0.11f,0.14f,1f);
+		if(LogicalStartY>400) batch.setColor(0.19f,0.14f,0.36f,1f);
+		if(LogicalStartY>450) batch.setColor(0f,0f,0f,1f);
+		//====================================
+		batch.draw(tile,TransferFromLogicalX(LogicalStartX),TransferFromLogicalY(LogicalStartY+LogicalHeight),LogicalWidth,LogicalHeight-1);
+	}
+	//=========================================================
 	float panX, panY, rot, zoom=1f;
 	BitmapFont font;
 	final float MOVE_SPEED = 10f;
@@ -78,6 +98,8 @@ public class port extends SimpleGame {
 			//in Photoshop, we included a small white box at the bottom right of our font sheet
 			//we will use this to draw lines and rectangles within the same batch as our text
 			rect = new TextureRegion(fontTex, fontTex.getWidth()-2, fontTex.getHeight()-2, 1, 1);
+			
+			OpenGLYardManager=new YardManager();
 			RecoveryScreen();
 		} catch (IOException e) {
 			// ... do something here ...
@@ -180,7 +202,7 @@ public class port extends SimpleGame {
 		drawRect(137,128,31,282,2);//Yard61
 		drawLine(137,165,137+31,165,2);
 		drawRect(189,128,31,282,2);//Yard60
-		drawLine(189,128+75,189+31,128+75,2);
+		drawLine(189,188,189+31,188,2);
 		drawRect(227,128,31,282,2);//Yard59
 		drawLine(227,165,227+31,165,2);
 		drawRect(262,128,31,282,2);//Yard58
@@ -275,8 +297,8 @@ public class port extends SimpleGame {
 		drawRect(1887,128,31,424,2);//Yard16
 		drawLine(1887,165,1887+31,165,2);
 		
-		drawRect(1939,128,31,424,2);//Yard15
-		drawLine(1939,135,1939+31,135,2);
+		drawRect(1925,128,31,424,2);//Yard15
+		drawLine(1925,135,1925+31,135,2);
 		drawRect(1977,128,31,424,2);//Yard14
 		drawLine(1977,135,1977+31,135,2);
 		drawRect(2012,128,31,424,2);//Yard13
@@ -288,8 +310,8 @@ public class port extends SimpleGame {
 		
 		drawRect(2122,128,31,420,2);//Yard10
 		drawLine(2122,165,2122+31,165,2);
-		drawRect(2174,128,31,408,2);//Yard09
-		drawLine(2174,135,2174+31,135,2);
+		drawRect(2160,128,31,408,2);//Yard09
+		drawLine(2160,135,2160+31,135,2);
 		drawRect(2211,128,31,398,2);//Yard08
 		drawLine(2211,135,2211+31,135,2);
 		drawRect(2246,128,31,372,2);//Yard07
@@ -378,14 +400,14 @@ public class port extends SimpleGame {
 		font.drawText(batch, "17", TransferFromLogicalX(1850+7),TransferFromLogicalY(128));
 		font.drawText(batch, "16", TransferFromLogicalX(1887+7),TransferFromLogicalY(128));
 		
-		font.drawText(batch, "15", TransferFromLogicalX(1939+7),TransferFromLogicalY(128));
+		font.drawText(batch, "15", TransferFromLogicalX(1925+7),TransferFromLogicalY(128));
 		font.drawText(batch, "14", TransferFromLogicalX(1977+7),TransferFromLogicalY(128));
 		font.drawText(batch, "13", TransferFromLogicalX(2012+7),TransferFromLogicalY(128));
 		font.drawText(batch, "12", TransferFromLogicalX(2049+7),TransferFromLogicalY(128));
 		font.drawText(batch, "11", TransferFromLogicalX(2084+7),TransferFromLogicalY(128));
 		
 		font.drawText(batch, "10", TransferFromLogicalX(2122+7),TransferFromLogicalY(128));
-		font.drawText(batch, "09", TransferFromLogicalX(2174+7),TransferFromLogicalY(128));
+		font.drawText(batch, "09", TransferFromLogicalX(2160+7),TransferFromLogicalY(128));
 		font.drawText(batch, "08", TransferFromLogicalX(2211+7),TransferFromLogicalY(128));
 		font.drawText(batch, "07", TransferFromLogicalX(2246+7),TransferFromLogicalY(128));
 		font.drawText(batch, "06", TransferFromLogicalX(2284+7),TransferFromLogicalY(128));
@@ -414,6 +436,9 @@ public class port extends SimpleGame {
 		drawLine(410,446,124,446,2);
 		drawLine(124,446,124,135,2);
 		drawLine(124,135,-25,135,2);
+		//From Manager=================================================================
+
+		OpenGLYardManager.DrawOpenGL();
 		//finish the sprite batch and push the tiles to the GPU
 		batch.end();
 	}
@@ -437,23 +462,23 @@ public class port extends SimpleGame {
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
 		{
-			panX += 4*MOVE_SPEED;
-			ScreenX -= 4*MOVE_SPEED;
+			panX += 4*MOVE_SPEED/zoom;
+			ScreenX -= 4*MOVE_SPEED/zoom;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
 		{
-			panX -= 4*MOVE_SPEED;
-			ScreenX += 4*MOVE_SPEED;
+			panX -= 4*MOVE_SPEED/zoom;
+			ScreenX += 4*MOVE_SPEED/zoom;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 		{
-			panY -= 4*MOVE_SPEED;
-			ScreenY -= 4*MOVE_SPEED;
+			panY -= 4*MOVE_SPEED/zoom;
+			ScreenY -= 4*MOVE_SPEED/zoom;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_UP))
 		{
-			panY += 4*MOVE_SPEED;
-			ScreenY += 4*MOVE_SPEED;
+			panY += 4*MOVE_SPEED/zoom;
+			ScreenY += 4*MOVE_SPEED/zoom;
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_Z))
